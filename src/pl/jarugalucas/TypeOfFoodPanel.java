@@ -15,7 +15,7 @@ public class TypeOfFoodPanel extends JPanel {
 
         // basic settings for TypeOfFoodPanel
         this.setLayout(null);
-        this.setSize(new Dimension(300, 500));
+        this.setBounds(0,0,300, 462);
         this.setBackground(Color.gray);
 
         //Step1 text settings
@@ -47,11 +47,12 @@ public class TypeOfFoodPanel extends JPanel {
         mixButton.setFocusable(false);
 
         // adding components to TypeOfFoodPanel
+
+        this.add(step1Text);
+        this.add(chooseTypeOfFoodText);
         this.add(dryButton);
         this.add(wetButton);
         this.add(mixButton);
-        this.add(step1Text);
-        this.add(chooseTypeOfFoodText);
 
     }
 }

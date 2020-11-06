@@ -1,6 +1,7 @@
 package pl.jarugalucas;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
@@ -15,10 +16,10 @@ public class MainFrame extends JFrame {
         // settings for MainFrame of application
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 500);
+        this.setLayout(null);
         this.setTitle("Cat Food Calculator");
         this.setIconImage(appIcon.getImage());
         this.setLocation(650,350);
-        this.setVisible(true);
         this.setResizable(false);
 
         typeOfFoodPanel = new TypeOfFoodPanel();
@@ -27,5 +28,6 @@ public class MainFrame extends JFrame {
         this.add(typeOfFoodPanel);
         this.add(userDataPanel);
 
+        this.setVisible(true);
     }
 }
