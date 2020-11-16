@@ -3,8 +3,10 @@ package pl.jarugalucas;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class UserDataPanel extends JPanel {
+public class UserDataPanel extends JPanel implements ActionListener {
 
     private JLabel step2Text;
     private JLabel catWeightLabel;
@@ -13,6 +15,8 @@ public class UserDataPanel extends JPanel {
     private JTextField wetFoodText;
     private JTextField catWeightText;
     private JTextField noMealsText;
+    private JRadioButton wetMealType;
+    private JRadioButton dryMealType;
     private JLabel resultOneFoodText;
     private JLabel resultMixFoodText;
     private JButton calculateButton;
@@ -45,8 +49,8 @@ public class UserDataPanel extends JPanel {
         wetFoodLabel.setVisible(false);
 
         //ilosc posilkow text settings
-        noMealsLabel = new JLabel("ilosc posilkow");
-        noMealsLabel.setBounds(15, 135, 100, 40);
+        noMealsLabel = new JLabel("NUMBER OF MEALS");
+        noMealsLabel.setBounds(15, 135, 120, 40);
         noMealsLabel.setForeground(Color.yellow);
         noMealsLabel.setVisible(false);
 
@@ -66,21 +70,39 @@ public class UserDataPanel extends JPanel {
         wetFoodText.setBounds(15, 115,150,20);
         wetFoodText.setVisible(false);
 
+        //rodzaj karmy
+        wetMealType = new JRadioButton();
+        wetMealType.setText("WET");
+        wetMealType.setBounds(15, 165, 70, 20);
+        wetMealType.setVisible(false);
+        wetMealType.setFocusable(false);
+
+        dryMealType = new JRadioButton();
+        dryMealType.setText("DRY");
+        dryMealType.setBounds(94, 165, 70, 20);
+        dryMealType.setVisible(false);
+        dryMealType.setFocusable(false);
+
+        ButtonGroup mealTypeGroup = new ButtonGroup();
+        mealTypeGroup.add(wetMealType);
+        mealTypeGroup.add(dryMealType);
+
         //ilosc posilkow field settings
         noMealsText = new JTextField();
-        noMealsText.setBounds(15, 165,150,20);
+        noMealsText.setBounds(15, 190,150,20);
         noMealsText.setVisible(false);
+        noMealsText.addActionListener(this);
 
         // wynik obliczen
         resultOneFoodText = new JLabel();
-        resultOneFoodText.setBounds(15, 240, 200, 30);
+        resultOneFoodText.setBounds(15, 300, 200, 30);
         resultOneFoodText.setText("Wynik to: " + "40" + " g");
         resultOneFoodText.setForeground(Color.yellow);
         resultOneFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
         resultOneFoodText.setVisible(false);
 
         resultMixFoodText = new JLabel();
-        resultMixFoodText.setBounds(15, 240, 200, 30);
+        resultMixFoodText.setBounds(15, 300, 200, 30);
         resultMixFoodText.setText("Wynik to: " + "60" + " g");
         resultMixFoodText.setForeground(Color.yellow);
         resultMixFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -92,8 +114,9 @@ public class UserDataPanel extends JPanel {
         // Calculate button settings
         calculateButton = new JButton("Oblicz");
         calculateButton.setFocusable(false);
-        calculateButton.setBounds(40, 200, 70, 30);
+        calculateButton.setBounds(40, 260, 70, 30);
         calculateButton.setVisible(false);
+        calculateButton.addActionListener(this);
 
         // adding components to TypeOfFoodPanel
         this.add(step2Text);
@@ -104,6 +127,9 @@ public class UserDataPanel extends JPanel {
         this.add(wetFoodLabel);
         this.add(wetFoodText);
 
+        this.add(dryMealType);
+        this.add(wetMealType);
+
         this.add(noMealsLabel);
         this.add(noMealsText);
 
@@ -112,6 +138,20 @@ public class UserDataPanel extends JPanel {
 
         this.add(calculateButton);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        Object source = e.getSource();
+
+        if(source == calculateButton){
+            //TODO
+        }
+
+
+
+    }
+
 
     public JLabel getStep2Text() {
         return step2Text;
@@ -151,5 +191,13 @@ public class UserDataPanel extends JPanel {
 
     public JButton getCalculateButton() {
         return calculateButton;
+    }
+
+    public JRadioButton getWetMealType() {
+        return wetMealType;
+    }
+
+    public JRadioButton getDryMealType() {
+        return dryMealType;
     }
 }

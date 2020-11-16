@@ -74,6 +74,8 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
         userDataPanel.getNoMealsLabel().setVisible(true);
         userDataPanel.getNoMealsText().setVisible(true);
         userDataPanel.getCalculateButton().setVisible(true);
+        userDataPanel.getWetMealType().setVisible(true);
+        userDataPanel.getDryMealType().setVisible(true);
 
         if(source == mixButton) {
             userDataPanel.getWetFoodLabel().setVisible(true);
