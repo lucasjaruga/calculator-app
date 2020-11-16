@@ -15,7 +15,6 @@ public class UserDataPanel extends JPanel {
     private JTextField noMealsText;
     private JLabel resultOneFoodText;
     private JLabel resultMixFoodText;
-
     private JButton calculateButton;
 
     public UserDataPanel(){
@@ -31,21 +30,25 @@ public class UserDataPanel extends JPanel {
         step2Text = new JLabel("Step 2) Wprowadz dane dot. kota i karmy");
         step2Text.setBounds(15, 10, 300, 40);
         step2Text.setForeground(Color.green);
+        step2Text.setVisible(false);
 
         //waga kota text settings
         catWeightLabel = new JLabel("weight of cat");
         catWeightLabel.setBounds(15, 35, 100, 40);
         catWeightLabel.setForeground(Color.yellow);
+        catWeightLabel.setVisible(false);
 
         //ilosc mokrej text settings
         wetFoodLabel = new JLabel("ilosc mokrej");
         wetFoodLabel.setBounds(15, 85, 100, 40);
         wetFoodLabel.setForeground(Color.yellow);
+        wetFoodLabel.setVisible(false);
 
         //ilosc posilkow text settings
         noMealsLabel = new JLabel("ilosc posilkow");
         noMealsLabel.setBounds(15, 135, 100, 40);
         noMealsLabel.setForeground(Color.yellow);
+        noMealsLabel.setVisible(false);
 
         // ------------------- text labels end -------------------------- //
 
@@ -56,14 +59,17 @@ public class UserDataPanel extends JPanel {
         //waga kota field settings
         catWeightText = new JTextField();
         catWeightText.setBounds(15, 65,150,20);
+        catWeightText.setVisible(false);
 
         //ilosc mokrej field settings
         wetFoodText = new JTextField();
         wetFoodText.setBounds(15, 115,150,20);
+        wetFoodText.setVisible(false);
 
         //ilosc posilkow field settings
         noMealsText = new JTextField();
         noMealsText.setBounds(15, 165,150,20);
+        noMealsText.setVisible(false);
 
         // wynik obliczen
         resultOneFoodText = new JLabel();
@@ -78,7 +84,7 @@ public class UserDataPanel extends JPanel {
         resultMixFoodText.setText("Wynik to: " + "60" + " g");
         resultMixFoodText.setForeground(Color.yellow);
         resultMixFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
-        resultMixFoodText.setVisible(true);
+        resultMixFoodText.setVisible(false);
 
         // ------------------- text fields end -------------------------- //
 
@@ -87,6 +93,7 @@ public class UserDataPanel extends JPanel {
         calculateButton = new JButton("Oblicz");
         calculateButton.setFocusable(false);
         calculateButton.setBounds(40, 200, 70, 30);
+        calculateButton.setVisible(false);
 
         // adding components to TypeOfFoodPanel
         this.add(step2Text);
@@ -104,5 +111,45 @@ public class UserDataPanel extends JPanel {
         this.add(resultMixFoodText);
 
         this.add(calculateButton);
+    }
+
+    public JLabel getStep2Text() {
+        return step2Text;
+    }
+
+    public JLabel getCatWeightLabel() {
+        return catWeightLabel;
+    }
+
+    public JLabel getWetFoodLabel() {
+        return wetFoodLabel;
+    }
+
+    public JLabel getNoMealsLabel() {
+        return noMealsLabel;
+    }
+
+    public JTextField getWetFoodText() {
+        return wetFoodText;
+    }
+
+    public JTextField getCatWeightText() {
+        return catWeightText;
+    }
+
+    public JTextField getNoMealsText() {
+        return noMealsText;
+    }
+
+    public JLabel getResultOneFoodText() {
+        return resultOneFoodText;
+    }
+
+    public JLabel getResultMixFoodText() {
+        return resultMixFoodText;
+    }
+
+    public JButton getCalculateButton() {
+        return calculateButton;
     }
 }
