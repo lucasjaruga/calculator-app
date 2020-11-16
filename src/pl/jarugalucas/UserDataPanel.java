@@ -21,6 +21,11 @@ public class UserDataPanel extends JPanel implements ActionListener {
     private JLabel resultMixFoodText;
     private JButton calculateButton;
 
+    private Boolean calculateWet = false;
+    private Boolean calculateDry = false;
+
+    private Double wetResult;
+
     public UserDataPanel(){
 
         // basic settings for UserDataPanel
@@ -98,7 +103,6 @@ public class UserDataPanel extends JPanel implements ActionListener {
         // wynik obliczen
         resultOneFoodText = new JLabel();
         resultOneFoodText.setBounds(15, 300, 200, 30);
-        resultOneFoodText.setText("Result is: " + "40" + " g");
         resultOneFoodText.setForeground(Color.yellow);
         resultOneFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
         resultOneFoodText.setVisible(false);
@@ -148,10 +152,30 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
         if(source == calculateButton){
             //TODO
+            Algorithm algorithm = new Algorithm();
+            String catWeight = catWeightText.getText();
+            String noMeals = noMealsText.getText();
+
+            if(calculateWet){
+                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                resultOneFoodText.setText("Result is: " + wetResult + " g");
+                resultOneFoodText.setVisible(true);
+            } else if(calculateDry){
+                //todo
+            } else {
+                //todo
+            }
+
+
+
+
         } else if(source == dryMealType) {
+            calculateDry = true;
+            calculateWet = false;
 
         } else if(source == wetMealType) {
-
+            calculateWet = true;
+            calculateDry = false;
         }
     }
 
