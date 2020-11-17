@@ -25,6 +25,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
     private Boolean calculateDry = false;
 
     private Double wetResult;
+    private Double dryResult;
 
     public UserDataPanel(){
 
@@ -162,6 +163,9 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 resultOneFoodText.setVisible(true);
             } else if(calculateDry){
                 //todo
+                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                resultOneFoodText.setText("Result is: " + dryResult + " g");
+                resultOneFoodText.setVisible(true);
             } else {
                 //todo
             }

@@ -27,16 +27,14 @@ public final class Algorithm {
         return result;
     }
 
-    public Integer calculateDryFood(Integer catWeight, Integer noMeals){
+    public Double calculateDryFood(Integer catWeight, Integer noMeals){
 
-        Integer result = 0;
+        Double result = 0.0;
 
-        //todo
-
-
-
-
-
+        Integer x = catWeight - minCatWeight;
+        Double amountToAdd = x * dryFoodMultiplier;
+        Double amountOfFood = baseAmountOfDry + amountToAdd;
+        result = amountOfFood / noMeals;
 
         return result;
     }
