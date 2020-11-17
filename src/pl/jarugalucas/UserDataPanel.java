@@ -26,6 +26,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     private Double wetResult;
     private Double dryResult;
+    private Double percentOfDryFood;
 
     public UserDataPanel(){
 
@@ -49,14 +50,14 @@ public class UserDataPanel extends JPanel implements ActionListener {
         catWeightLabel.setVisible(false);
 
         //ilosc mokrej text settings
-        wetFoodLabel = new JLabel("HOW MUCH WET FOOD");
-        wetFoodLabel.setBounds(15, 85, 130, 40);
+        wetFoodLabel = new JLabel("HOW MUCH WET FOOD PER DAY");
+        wetFoodLabel.setBounds(15, 85, 200, 40);
         wetFoodLabel.setForeground(Color.yellow);
         wetFoodLabel.setVisible(false);
 
         //ilosc posilkow text settings
-        noMealsLabel = new JLabel("NUMBER OF MEALS");
-        noMealsLabel.setBounds(15, 135, 120, 40);
+        noMealsLabel = new JLabel("NUMBER OF MEALS PER DAY");
+        noMealsLabel.setBounds(15, 135, 180, 40);
         noMealsLabel.setForeground(Color.yellow);
         noMealsLabel.setVisible(false);
 
@@ -109,7 +110,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
         resultOneFoodText.setVisible(false);
 
         resultMixFoodText = new JLabel();
-        resultMixFoodText.setBounds(15, 300, 200, 30);
+        resultMixFoodText.setBounds(15, 300, 380, 30);
         resultMixFoodText.setText("Result is: " + "60" + " g");
         resultMixFoodText.setForeground(Color.yellow);
         resultMixFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -158,16 +159,24 @@ public class UserDataPanel extends JPanel implements ActionListener {
             String noMeals = noMealsText.getText();
 
             if(calculateWet){
+                Double finalResult;
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
-                resultOneFoodText.setText("Result is: " + wetResult + " g");
+                finalResult = wetResult / Double.valueOf(noMeals);
+                resultOneFoodText.setText("Result is: " + finalResult + " g");
                 resultOneFoodText.setVisible(true);
             } else if(calculateDry){
-                //todo
+                Double finalResult;
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
-                resultOneFoodText.setText("Result is: " + dryResult + " g");
+                finalResult = dryResult / Double.valueOf(noMeals);
+                resultOneFoodText.setText("Result is: " + finalResult + " g");
                 resultOneFoodText.setVisible(true);
             } else {
                 //todo
+                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
+                resultMixFoodText.setText("Result is: " + Double.valueOf(wetFoodText.getText()) / 3 + "g wet food and " + percentOfDryFood / 3 +" g dry food.");
+                resultMixFoodText.setVisible(true);
             }
 
 
@@ -182,7 +191,6 @@ public class UserDataPanel extends JPanel implements ActionListener {
             calculateDry = false;
         }
     }
-
 
     public JLabel getStep2Text() {
         return step2Text;
@@ -212,14 +220,6 @@ public class UserDataPanel extends JPanel implements ActionListener {
         return noMealsText;
     }
 
-    public JLabel getResultOneFoodText() {
-        return resultOneFoodText;
-    }
-
-    public JLabel getResultMixFoodText() {
-        return resultMixFoodText;
-    }
-
     public JButton getCalculateButton() {
         return calculateButton;
     }
@@ -230,5 +230,21 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     public JRadioButton getDryMealType() {
         return dryMealType;
+    }
+
+    public JLabel getResultMixFoodText() {
+        return resultMixFoodText;
+    }
+
+    public JLabel getResultOneFoodText() {
+        return resultOneFoodText;
+    }
+
+    public void setCalculateWet(Boolean calculateWet) {
+        this.calculateWet = calculateWet;
+    }
+
+    public void setCalculateDry(Boolean calculateDry) {
+        this.calculateDry = calculateDry;
     }
 }

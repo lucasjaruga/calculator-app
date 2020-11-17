@@ -71,9 +71,15 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
         if(source == mixButton) {
             userDataPanel.getWetFoodLabel().setVisible(true);
             userDataPanel.getWetFoodText().setVisible(true);
+            userDataPanel.getWetMealType().setVisible(false);
+            userDataPanel.getDryMealType().setVisible(false);
+            userDataPanel.getResultOneFoodText().setVisible(false);
+            userDataPanel.setCalculateDry(false);
+            userDataPanel.setCalculateWet(false);
         } else {
             userDataPanel.getWetFoodLabel().setVisible(false);
             userDataPanel.getWetFoodText().setVisible(false);
+            userDataPanel.getResultMixFoodText().setVisible(false);
         }
     }
 

@@ -1,5 +1,7 @@
 package pl.jarugalucas;
 
+import javax.swing.*;
+
 public final class Algorithm {
 
     private final Integer minCatWeight = 2000;
@@ -9,10 +11,7 @@ public final class Algorithm {
     private final Double wetFoodMultiplier = 0.025;
     private final Double dryFoodMultiplier = 0.01;
 
-    private UserDataPanel userDataPanel;
-
     public Algorithm() {
-        userDataPanel = MainFrame.getUserDataPanel();
     }
 
     public Double calculateWetFood(Integer catWeight, Integer noMeals){
@@ -22,7 +21,7 @@ public final class Algorithm {
         Integer x = catWeight - minCatWeight;
         Double amountToAdd = x * wetFoodMultiplier;
         Double amountOfFood = baseAmountOfWet + amountToAdd;
-        result = amountOfFood / noMeals;
+        result = amountOfFood;
 
         return result;
     }
@@ -34,21 +33,22 @@ public final class Algorithm {
         Integer x = catWeight - minCatWeight;
         Double amountToAdd = x * dryFoodMultiplier;
         Double amountOfFood = baseAmountOfDry + amountToAdd;
-        result = amountOfFood / noMeals;
+        result = amountOfFood;
 
         return result;
     }
 
     //TODO implement mix food method
-    public Integer calculateMixFood(Integer catWeight, Integer noMeals){
+    public Double calculatePercentOfDryFood(Double wetResult, Double dryResult, JTextField wetFoodText){
 
-        Integer result = 0;
+        Double result = 0.0;
 
         //todo
+        Double amountOfWet = Double.parseDouble(wetFoodText.getText());
+        Double dailyNeeds = amountOfWet / wetResult;
+        Double percentOfDryFood = 1.0 - dailyNeeds;
 
-
-
-
+        result = dryResult * percentOfDryFood;
 
 
         return result;
