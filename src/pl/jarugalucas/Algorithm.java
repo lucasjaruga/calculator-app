@@ -11,9 +11,6 @@ public final class Algorithm {
     private final Double wetFoodMultiplier = 0.025;
     private final Double dryFoodMultiplier = 0.01;
 
-    public Algorithm() {
-    }
-
     public Double calculateWetFood(Integer catWeight, Integer noMeals){
 
         Double result = 0.0;
@@ -38,7 +35,6 @@ public final class Algorithm {
         return result;
     }
 
-    //TODO implement mix food method
     public Double calculatePercentOfDryFood(Double wetResult, Double dryResult, JTextField wetFoodText){
 
         Double result = 0.0;
@@ -50,8 +46,6 @@ public final class Algorithm {
 
         result = dryResult * percentOfDryFood;
 
-
         return result;
     }
-
 }

@@ -5,6 +5,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.Bidi;
 
 public class UserDataPanel extends JPanel implements ActionListener {
 
@@ -104,13 +107,13 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
         // wynik obliczen
         resultOneFoodText = new JLabel();
-        resultOneFoodText.setBounds(15, 300, 200, 30);
+        resultOneFoodText.setBounds(15, 300, 240, 30);
         resultOneFoodText.setForeground(Color.yellow);
         resultOneFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
         resultOneFoodText.setVisible(false);
 
         resultMixFoodText = new JLabel();
-        resultMixFoodText.setBounds(15, 300, 380, 30);
+        resultMixFoodText.setBounds(15, 300, 450, 30);
         resultMixFoodText.setText("Result is: " + "60" + " g");
         resultMixFoodText.setForeground(Color.yellow);
         resultMixFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -145,6 +148,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
         this.add(resultMixFoodText);
 
         this.add(calculateButton);
+
     }
 
     @Override
@@ -153,7 +157,6 @@ public class UserDataPanel extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if(source == calculateButton){
-            //TODO
             Algorithm algorithm = new Algorithm();
             String catWeight = catWeightText.getText();
             String noMeals = noMealsText.getText();
@@ -162,25 +165,23 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 Double finalResult;
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
                 finalResult = wetResult / Double.valueOf(noMeals);
-                resultOneFoodText.setText("Result is: " + finalResult + " g");
+                finalResult = roundResult(finalResult);
+                resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else if(calculateDry){
                 Double finalResult;
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
                 finalResult = dryResult / Double.valueOf(noMeals);
-                resultOneFoodText.setText("Result is: " + finalResult + " g");
+                finalResult = roundResult(finalResult);
+                resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else {
-                //todo
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
                 percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
-                resultMixFoodText.setText("Result is: " + Double.valueOf(wetFoodText.getText()) / 3 + "g wet food and " + percentOfDryFood / 3 +" g dry food.");
+                resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / 3)  + "g wet food and " + roundResult(percentOfDryFood / 3) +" g dry food per meal.");
                 resultMixFoodText.setVisible(true);
             }
-
-
-
 
         } else if(source == dryMealType) {
             calculateDry = true;
@@ -190,6 +191,12 @@ public class UserDataPanel extends JPanel implements ActionListener {
             calculateWet = true;
             calculateDry = false;
         }
+    }
+
+    // method for rounding results
+    private static double roundResult(Double result){
+        double roundedValue = Math.round(result);
+        return roundedValue;
     }
 
     public JLabel getStep2Text() {
