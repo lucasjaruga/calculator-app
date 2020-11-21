@@ -162,6 +162,9 @@ public class UserDataPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        wetResult = 0.0;
+        dryResult = 0.0;
+
         Object source = e.getSource();
 
         start:
@@ -174,6 +177,11 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 break start;
             } else if (Integer.valueOf(catWeight) > 20000){
                 JOptionPane.showMessageDialog(null, "Cat weight too high! Cat weight must be between 2000 g and 20 000 g!", "Weight to low", JOptionPane.WARNING_MESSAGE);
+                break start;
+            }
+
+            if(Integer.valueOf(noMealsText.getText()) < 1){
+                JOptionPane.showMessageDialog(null, "Number of meals is wrong! It must be at least 1 meal per day", "Wrong meal number", JOptionPane.WARNING_MESSAGE);
                 break start;
             }
 

@@ -76,6 +76,7 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
             userDataPanel.getResultOneFoodText().setVisible(false);
             userDataPanel.setCalculateDry(false);
             userDataPanel.setCalculateWet(false);
+            userDataPanel.getMinCatWeightLabel().setVisible(true);
         } else {
             userDataPanel.getWetFoodLabel().setVisible(false);
             userDataPanel.getWetFoodText().setVisible(false);
