@@ -80,6 +80,7 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
             userDataPanel.getWetFoodLabel().setVisible(false);
             userDataPanel.getWetFoodText().setVisible(false);
             userDataPanel.getResultMixFoodText().setVisible(false);
+            userDataPanel.getMinCatWeightLabel().setVisible(true);
         }
     }
 

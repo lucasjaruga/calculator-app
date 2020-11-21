@@ -2,7 +2,6 @@ package pl.jarugalucas;
 
 import javax.swing.*;
 
-
 /**
  * The {@code Algorithm} class provides methods to calculate amount of food which user should give a cat.
  * It uses some base values from Gussto and Feringa labels (cat food producers).
@@ -13,10 +12,7 @@ import javax.swing.*;
 public final class Algorithm {
 
     private final Integer minCatWeight = 2000;
-
-    //TODO implement user warning about to low cat weight
     private final Integer maxCatWeight = 20000;
-
     private final Integer baseAmountOfWet = 150;
     private final Integer baseAmountOfDry = 40;
     private final Double wetFoodMultiplier = 0.025;
@@ -64,11 +60,9 @@ public final class Algorithm {
     public Double calculatePercentOfDryFood(Double wetResult, Double dryResult, JTextField wetFoodText){
 
         Double result = 0.0;
-        
         Double amountOfWet = Double.parseDouble(wetFoodText.getText());
         Double dailyNeeds = amountOfWet / wetResult;
         Double percentOfDryFood = 1.0 - dailyNeeds;
-
         result = dryResult * percentOfDryFood;
 
         return result;

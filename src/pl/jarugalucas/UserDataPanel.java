@@ -13,6 +13,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     private JLabel step2Text;
     private JLabel catWeightLabel;
+    private JLabel minCatWeightLabel;
     private JLabel wetFoodLabel;
     private JLabel noMealsLabel;
     private JTextField wetFoodText;
@@ -47,10 +48,16 @@ public class UserDataPanel extends JPanel implements ActionListener {
         step2Text.setVisible(false);
 
         //waga kota text settings
-        catWeightLabel = new JLabel("WEIGHT OF CAT");
-        catWeightLabel.setBounds(15, 35, 100, 40);
+        catWeightLabel = new JLabel("WEIGHT OF CAT in grams (g)");
+        catWeightLabel.setBounds(15, 35, 180, 40);
         catWeightLabel.setForeground(Color.yellow);
         catWeightLabel.setVisible(false);
+
+        // information about minimum weight
+        minCatWeightLabel = new JLabel("can't be less then 2000 g");
+        minCatWeightLabel.setBounds(180, 55, 160, 40);
+        minCatWeightLabel.setForeground(Color.red);
+        minCatWeightLabel.setVisible(false);
 
         //ilosc mokrej text settings
         wetFoodLabel = new JLabel("HOW MUCH WET FOOD PER DAY");
@@ -134,6 +141,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
         this.add(catWeightLabel);
         this.add(catWeightText);
+        this.add(minCatWeightLabel);
 
         this.add(wetFoodLabel);
         this.add(wetFoodText);
@@ -156,9 +164,19 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
         Object source = e.getSource();
 
+        start:
         if(source == calculateButton){
             Algorithm algorithm = new Algorithm();
+
             String catWeight = catWeightText.getText();
+            if(Integer.valueOf(catWeight) < 2000){
+                JOptionPane.showMessageDialog(null, "Cat weight too low! Cat weight must be between 2000 g and 20 000 g!", "Weight to low", JOptionPane.WARNING_MESSAGE);
+                break start;
+            } else if (Integer.valueOf(catWeight) > 20000){
+                JOptionPane.showMessageDialog(null, "Cat weight too high! Cat weight must be between 2000 g and 20 000 g!", "Weight to low", JOptionPane.WARNING_MESSAGE);
+                break start;
+            }
+
             String noMeals = noMealsText.getText();
 
             if(calculateWet){
@@ -179,7 +197,7 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
                 percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
-                resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / 3)  + "g wet food and " + roundResult(percentOfDryFood / 3) +" g dry food per meal.");
+                resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / Double.valueOf(noMeals))  + "g wet food and " + roundResult(percentOfDryFood / Double.valueOf(noMeals)) +" g dry food per meal.");
                 resultMixFoodText.setVisible(true);
             }
 
@@ -205,6 +223,10 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     public JLabel getCatWeightLabel() {
         return catWeightLabel;
+    }
+
+    public JLabel getMinCatWeightLabel() {
+        return minCatWeightLabel;
     }
 
     public JLabel getWetFoodLabel() {
