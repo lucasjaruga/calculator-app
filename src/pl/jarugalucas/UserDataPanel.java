@@ -163,21 +163,21 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
             if(calculateWet){
                 Double finalResult;
-                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
                 finalResult = wetResult / Double.valueOf(noMeals);
                 finalResult = roundResult(finalResult);
                 resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else if(calculateDry){
                 Double finalResult;
-                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
                 finalResult = dryResult / Double.valueOf(noMeals);
                 finalResult = roundResult(finalResult);
                 resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else {
-                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
-                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight), Integer.valueOf(noMeals));
+                wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
+                dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
                 percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
                 resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / 3)  + "g wet food and " + roundResult(percentOfDryFood / 3) +" g dry food per meal.");
                 resultMixFoodText.setVisible(true);
