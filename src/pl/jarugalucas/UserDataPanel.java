@@ -54,8 +54,8 @@ public class UserDataPanel extends JPanel implements ActionListener {
         catWeightLabel.setVisible(false);
 
         // information about minimum weight
-        minCatWeightLabel = new JLabel("can't be less then 2000 g");
-        minCatWeightLabel.setBounds(180, 55, 160, 40);
+        minCatWeightLabel = new JLabel("value between 2 000 and 20 000");
+        minCatWeightLabel.setBounds(180, 55, 200, 40);
         minCatWeightLabel.setForeground(Color.red);
         minCatWeightLabel.setVisible(false);
 
@@ -180,8 +180,8 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 break start;
             }
 
-            if(Integer.valueOf(noMealsText.getText()) < 1){
-                JOptionPane.showMessageDialog(null, "Number of meals is wrong! It must be at least 1 meal per day", "Wrong meal number", JOptionPane.WARNING_MESSAGE);
+            if(Integer.valueOf(noMealsText.getText()) < 1 || Integer.valueOf(noMealsText.getText()) > 8){
+                JOptionPane.showMessageDialog(null, "Number of meals is wrong! It must be at least 1 or maximum 8 meals per day", "Wrong meal number", JOptionPane.WARNING_MESSAGE);
                 break start;
             }
 
@@ -203,6 +203,13 @@ public class UserDataPanel extends JPanel implements ActionListener {
                 resultOneFoodText.setVisible(true);
             } else {
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
+                String wetFood = wetFoodText.getText();
+
+                if(Double.valueOf(wetFood) > wetResult){
+                    JOptionPane.showMessageDialog(null, "You want to give TOO MUCH wet food to your cat! Lower wet food value. \n\n It must be at most " + wetResult, "Too much wet food", JOptionPane.WARNING_MESSAGE);
+                    break start;
+                }
+
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
                 percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
                 resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / Double.valueOf(noMeals))  + "g wet food and " + roundResult(percentOfDryFood / Double.valueOf(noMeals)) +" g dry food per meal.");
