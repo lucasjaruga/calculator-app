@@ -9,6 +9,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.Bidi;
 
+/**
+ *
+ *
+ * @author Lucas Jaruga
+ * @version 1.0
+ */
 public class UserDataPanel extends JPanel implements ActionListener {
 
     private JLabel step2Text;

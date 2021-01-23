@@ -5,6 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The TypeOfFoodPanel class is mainly responsible for allowing user to choose which type of food wants to calculate.
+ * It provides two clickable buttons for that purpose.
+ *
+ * @author Lucas Jaruga
+ * @version 1.0
+ */
+
 public class TypeOfFoodPanel extends JPanel implements ActionListener {
 
     private JButton dryWetButton;
@@ -14,12 +22,12 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
 
     public TypeOfFoodPanel(){
 
-        // basic settings for TypeOfFoodPanel
+        /** basic settings for TypeOfFoodPanel */
         this.setLayout(null);
         this.setBounds(0,0,300, 462);
         this.setBackground(Color.gray);
 
-        //Step1 text settings
+        /** Step1 text settings */
         step1Text = new JLabel("Step 1)");
         step1Text.setBounds(5, 10, 100, 40);
         step1Text.setForeground(Color.green);
@@ -87,5 +95,4 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
             userDataPanel.getMinCatWeightLabel().setVisible(true);
         }
     }
-
 }
