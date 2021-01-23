@@ -10,31 +10,30 @@ import java.math.RoundingMode;
 import java.text.Bidi;
 
 /**
- *
+ * The {@code UserDataPanel} class is responsible for providing necessary elements of interface,
+ * to allow the user to provide all important information about a cat.
  *
  * @author Lucas Jaruga
  * @version 1.0
  */
 public class UserDataPanel extends JPanel implements ActionListener {
 
-    private JLabel step2Text;
-    private JLabel catWeightLabel;
-    private JLabel minCatWeightLabel;
-    private JLabel wetFoodLabel;
-    private JLabel noMealsLabel;
-    private JTextField wetFoodText;
-    private JTextField catWeightText;
-    private JTextField noMealsText;
-    private JRadioButton wetMealType;
-    private JRadioButton dryMealType;
+    private final JLabel step2Text;
+    private final JLabel catWeightLabel;
+    private final JLabel minCatWeightLabel;
+    private final JLabel wetFoodLabel;
+    private final JLabel noMealsLabel;
+    private final JTextField wetFoodText;
+    private final JTextField catWeightText;
+    private final JTextField noMealsText;
+    private final JRadioButton wetMealType;
+    private final JRadioButton dryMealType;
 
-    private ButtonGroup jRadioButtons = new ButtonGroup();
+    private final ButtonGroup jRadioButtons = new ButtonGroup();
 
-
-
-    private JLabel resultOneFoodText;
-    private JLabel resultMixFoodText;
-    private JButton calculateButton;
+    private final JLabel resultOneFoodText;
+    private final JLabel resultMixFoodText;
+    private final JButton calculateButton;
 
     private Boolean calculateWet = false;
     private Boolean calculateDry = false;
@@ -43,64 +42,61 @@ public class UserDataPanel extends JPanel implements ActionListener {
     private Double dryResult;
     private Double percentOfDryFood;
 
-
-
     public UserDataPanel(){
 
-        // basic settings for UserDataPanel
+        /** Basic settings for {@code UserDataPanel} class */
         this.setLayout(null);
         this.setBackground(Color.darkGray);
         this.setBounds(300, 0, 485, 462);
 
-        // ------------------- text labels start -------------------------- //
+        /** ================ Text labels settings starts here ================ */
 
-        //Step2 text settings
+        /** Step 2 text settings */
         step2Text = new JLabel("Step 2) PROVIDE INFORMATION ABOUT CAT AND FOOD");
         step2Text.setBounds(15, 10, 320, 40);
         step2Text.setForeground(Color.green);
         step2Text.setVisible(false);
 
-        //waga kota text settings
+        /** "WEIGHT OF CAT in grams (g)" text settings */
         catWeightLabel = new JLabel("WEIGHT OF CAT in grams (g)");
         catWeightLabel.setBounds(15, 35, 180, 40);
         catWeightLabel.setForeground(Color.yellow);
         catWeightLabel.setVisible(false);
 
-        // information about minimum weight
+        /** information for user about minimum weight of cat */
         minCatWeightLabel = new JLabel("value between 2 000 and 20 000");
         minCatWeightLabel.setBounds(180, 55, 200, 40);
         minCatWeightLabel.setForeground(Color.red);
         minCatWeightLabel.setVisible(false);
 
-        //ilosc mokrej text settings
+        /** text about how much food user wants to give to a cat */
         wetFoodLabel = new JLabel("HOW MUCH WET FOOD PER DAY");
         wetFoodLabel.setBounds(15, 85, 200, 40);
         wetFoodLabel.setForeground(Color.yellow);
         wetFoodLabel.setVisible(false);
 
-        //ilosc posilkow text settings
+        /** "NUMBER OF MEALS PER DAY" text settings */
         noMealsLabel = new JLabel("NUMBER OF MEALS PER DAY");
         noMealsLabel.setBounds(15, 135, 180, 40);
         noMealsLabel.setForeground(Color.yellow);
         noMealsLabel.setVisible(false);
 
-        // ------------------- text labels end -------------------------- //
+        /** ================ Text labels settings ends here ================ */
 
 
+        /** ================ Text fields settings starts here ================ */
 
-        // ------------------- text fields start -------------------------- //
-
-        //waga kota field settings
+        /** Cat Weight field settings */
         catWeightText = new JTextField();
         catWeightText.setBounds(15, 65,150,20);
         catWeightText.setVisible(false);
 
-        //ilosc mokrej field settings
+        /** Amount of wet food field settings */
         wetFoodText = new JTextField();
         wetFoodText.setBounds(15, 115,150,20);
         wetFoodText.setVisible(false);
 
-        //rodzaj karmy
+        /** Settings for two radio buttons which allow user to define type of food to calculate */
         wetMealType = new JRadioButton();
         wetMealType.setText("WET");
         wetMealType.setBounds(15, 165, 70, 20);
@@ -115,17 +111,21 @@ public class UserDataPanel extends JPanel implements ActionListener {
         dryMealType.setFocusable(false);
         dryMealType.addActionListener(this);
 
+        /** Adding both radio buttons to a group. It allows clearing selection any of them when it is necessary.
+         * Check {@code TypeOfFoodPanel}, line 96 */
         ButtonGroup mealTypeGroup = new ButtonGroup();
         mealTypeGroup.add(wetMealType);
         mealTypeGroup.add(dryMealType);
 
         //ilosc posilkow field settings
+        /** "Number of meals per day" text field settings */
         noMealsText = new JTextField();
         noMealsText.setBounds(15, 190,150,20);
         noMealsText.setVisible(false);
         noMealsText.addActionListener(this);
 
         // wynik obliczen
+        /** result of calculations - text label settings, information which user gets at the end */
         resultOneFoodText = new JLabel();
         resultOneFoodText.setBounds(15, 300, 240, 30);
         resultOneFoodText.setForeground(Color.yellow);
@@ -134,22 +134,21 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
         resultMixFoodText = new JLabel();
         resultMixFoodText.setBounds(15, 300, 450, 30);
-        resultMixFoodText.setText("Result is: " + "60" + " g");
         resultMixFoodText.setForeground(Color.yellow);
         resultMixFoodText.setFont(new Font("Calibri", Font.BOLD, 20));
         resultMixFoodText.setVisible(false);
 
-        // ------------------- text fields end -------------------------- //
+        /** ================ Text fields settings ends here ================ */
 
 
-        // Calculate button settings
+        /** >>Calculate<< button settings */
         calculateButton = new JButton("Calculate");
         calculateButton.setFocusable(false);
         calculateButton.setBounds(25, 260, 120, 30);
         calculateButton.setVisible(false);
         calculateButton.addActionListener(this);
 
-        // adding components to TypeOfFoodPanel
+        /** ================ Adding all components to {@code UserDataPanel} ================ */
         this.add(step2Text);
 
         this.add(catWeightLabel);
@@ -174,6 +173,8 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     }
 
+    /** Implementation of method from an ActionListener interface,
+     * to allow buttons and text fields to react on user actions. */
     @Override
     public void actionPerformed(ActionEvent e) {
 

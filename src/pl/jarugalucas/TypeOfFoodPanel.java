@@ -6,67 +6,73 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The TypeOfFoodPanel class is mainly responsible for allowing user to choose which type of food wants to calculate.
+ * The {@code TypeOfFoodPanel} class is mainly responsible for allowing user to choose which type of food wants to calculate.
  * It provides two clickable buttons for that purpose.
  *
  * @author Lucas Jaruga
  * @version 1.0
  */
-
 public class TypeOfFoodPanel extends JPanel implements ActionListener {
 
-    private JButton dryWetButton;
-    private JButton mixButton;
-    private JLabel chooseTypeOfFoodText;
-    private JLabel step1Text;
+    private final JButton dryWetButton;
+    private final JButton mixFoodButton;
+    private final JLabel chooseTypeOfFoodText;
+    private final JLabel step1Text;
 
     public TypeOfFoodPanel(){
 
-        /** basic settings for TypeOfFoodPanel */
+        /** Basic settings for {@code TypeOfFoodPanel} class */
         this.setLayout(null);
         this.setBounds(0,0,300, 462);
         this.setBackground(Color.gray);
 
-        /** Step1 text settings */
+        /** ================ Text fields settings ================ */
+
+        /** Step 1 text settings */
         step1Text = new JLabel("Step 1)");
         step1Text.setBounds(5, 10, 100, 40);
         step1Text.setForeground(Color.green);
 
-        //TypeOfFood text settings
+        /** chooseTypeOfFoodText text settings */
         chooseTypeOfFoodText = new JLabel("CHOOSE THE TYPE OF FOOD TO CALCULATE");
         chooseTypeOfFoodText.setBounds(30, 30, 290, 40);
         chooseTypeOfFoodText.setForeground(Color.orange);
 
-        //dry food button settings
+        /** ================ Buttons settings ================ */
+
+        /** >>Dry/wet food<< button settings */
         dryWetButton = new JButton();
         dryWetButton.setText("Dry / wet food");
         dryWetButton.setBounds(88,70, 115, 40);
         dryWetButton.setFocusable(false);
         dryWetButton.addActionListener(this);
 
-        //mix food button settings
-        mixButton = new JButton();
-        mixButton.setText("Mix food");
-        mixButton.setBounds(100,120, 90, 40);
-        mixButton.setFocusable(false);
-        mixButton.addActionListener(this);
+        /** >>Mix food<< button settings */
+        mixFoodButton = new JButton();
+        mixFoodButton.setText("Mix food");
+        mixFoodButton.setBounds(100,120, 90, 40);
+        mixFoodButton.setFocusable(false);
+        mixFoodButton.addActionListener(this);
 
-        // adding components to TypeOfFoodPanel
-
+        /** Adding dryWetButton and mixButton to {@code TypeOfFoodPanel} */
         this.add(step1Text);
         this.add(chooseTypeOfFoodText);
         this.add(dryWetButton);
-        this.add(mixButton);
-
+        this.add(mixFoodButton);
     }
 
+    /** Implementation of method from an {@code ActionListener} interface, to allow buttons to react on user actions.
+     * Also to control which parts of {@code UserDataPanel} class are showed to user, based on which button was clicked. */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // TODO improve logic here
 
+        /** lines 69 to 82 show user a common information which are the same for Dry/Wet Food and Mix Food.
+         * So no need to assign those to concrete button */
         UserDataPanel userDataPanel = MainFrame.getUserDataPanel();
         userDataPanel.getStep2Text().setVisible(true);
 
-        Object source = e.getSource();
+        Object whichButton = e.getSource();
 
         userDataPanel.getCatWeightLabel().setVisible(true);
         userDataPanel.getCatWeightText().setVisible(true);
@@ -76,7 +82,8 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
         userDataPanel.getWetMealType().setVisible(true);
         userDataPanel.getDryMealType().setVisible(true);
 
-        if(source == mixButton) {
+        /** based on which button user used, show needed elements from {@code UserDataPanel} class */
+        if(whichButton == mixFoodButton) {
             userDataPanel.getWetFoodLabel().setVisible(true);
             userDataPanel.getWetFoodText().setVisible(true);
             userDataPanel.getWetMealType().setVisible(false);
@@ -87,7 +94,6 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
             userDataPanel.getMinCatWeightLabel().setVisible(true);
         } else {
             userDataPanel.getJRadioButtons().clearSelection();
-
             userDataPanel.setCalculateWet(true);
             userDataPanel.getWetFoodLabel().setVisible(false);
             userDataPanel.getWetFoodText().setVisible(false);

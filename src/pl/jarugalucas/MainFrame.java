@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The MainFrame class responsible for showing main window of application and to store other panels with more information
+ * The {@code MainFrame} class responsible for showing main window of application and to store other panels with more information
  * for users, like choosing type of food to calculate and also fields to provide information about cat, food etc.
  *
  * @author Lucas Jaruga
@@ -16,11 +16,12 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
 
     private final TypeOfFoodPanel typeOfFoodPanel;
+    // TODO why static???
     private static UserDataPanel userDataPanel;
 
     public MainFrame() {
 
-        /** MainFrame settings of application */
+        /** {@code MainFrame} settings of application */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 500);
         this.setLayout(null);
@@ -30,7 +31,7 @@ public class MainFrame extends JFrame {
         this.setLocation(650, 350);
         this.setResizable(false);
 
-        /** adding two panels to MainFrame */
+        /** Adding two panels to MainFrame */
         typeOfFoodPanel = new TypeOfFoodPanel();
         userDataPanel = new UserDataPanel();
         this.add(typeOfFoodPanel);
