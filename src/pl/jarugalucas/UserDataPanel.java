@@ -21,6 +21,11 @@ public class UserDataPanel extends JPanel implements ActionListener {
     private JTextField noMealsText;
     private JRadioButton wetMealType;
     private JRadioButton dryMealType;
+
+    private ButtonGroup jRadioButtons = new ButtonGroup();
+
+
+
     private JLabel resultOneFoodText;
     private JLabel resultMixFoodText;
     private JButton calculateButton;
@@ -31,6 +36,8 @@ public class UserDataPanel extends JPanel implements ActionListener {
     private Double wetResult;
     private Double dryResult;
     private Double percentOfDryFood;
+
+
 
     public UserDataPanel(){
 
@@ -146,6 +153,8 @@ public class UserDataPanel extends JPanel implements ActionListener {
         this.add(wetFoodLabel);
         this.add(wetFoodText);
 
+        jRadioButtons.add(dryMealType);
+        jRadioButtons.add(wetMealType);
         this.add(dryMealType);
         this.add(wetMealType);
 
@@ -290,5 +299,9 @@ public class UserDataPanel extends JPanel implements ActionListener {
 
     public void setCalculateDry(Boolean calculateDry) {
         this.calculateDry = calculateDry;
+    }
+
+    public ButtonGroup getJRadioButtons() {
+        return jRadioButtons;
     }
 }

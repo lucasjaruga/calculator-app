@@ -78,6 +78,9 @@ public class TypeOfFoodPanel extends JPanel implements ActionListener {
             userDataPanel.setCalculateWet(false);
             userDataPanel.getMinCatWeightLabel().setVisible(true);
         } else {
+            userDataPanel.getJRadioButtons().clearSelection();
+
+            userDataPanel.setCalculateWet(true);
             userDataPanel.getWetFoodLabel().setVisible(false);
             userDataPanel.getWetFoodText().setVisible(false);
             userDataPanel.getResultMixFoodText().setVisible(false);
