@@ -10,7 +10,7 @@ package pl.jarugalucas;
 public class CatFoodCalculator {
     public static void main(String[] args) {
 
-        /** Starting point of application. Creates {@code MainFrame} of application,
+        /* Starting point of application. Creates {@code MainFrame} of application,
          * where all other elements are stored */
         new MainFrame();
     }

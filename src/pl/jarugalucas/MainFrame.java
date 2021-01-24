@@ -1,10 +1,6 @@
 package pl.jarugalucas;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The {@code MainFrame} class responsible for showing main window of application and to store other panels with more information
@@ -15,13 +11,14 @@ import java.awt.event.ActionListener;
  */
 public class MainFrame extends JFrame {
 
-    private final TypeOfFoodPanel typeOfFoodPanel;
     // TODO why static???
     private static UserDataPanel userDataPanel;
 
     public MainFrame() {
 
-        /** {@code MainFrame} settings of application */
+        TypeOfFoodPanel typeOfFoodPanel;
+
+        /* MainFrame settings of application */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 500);
         this.setLayout(null);
@@ -31,7 +28,7 @@ public class MainFrame extends JFrame {
         this.setLocation(650, 350);
         this.setResizable(false);
 
-        /** Adding two panels to MainFrame */
+        /* Adding two panels to MainFrame */
         typeOfFoodPanel = new TypeOfFoodPanel();
         userDataPanel = new UserDataPanel();
         this.add(typeOfFoodPanel);

@@ -13,12 +13,6 @@ import javax.swing.*;
 public final class Algorithm {
 
     private final Integer minCatWeight = 2000;
-    // TODO remove maxCatWeight or redesign it
-    private final Integer maxCatWeight = 20000;
-    private final Integer baseAmountOfWet = 150;
-    private final Integer baseAmountOfDry = 40;
-    private final Double wetFoodMultiplier = 0.025;
-    private final Double dryFoodMultiplier = 0.01;
 
     /**
      * Method to calculate wet food based on catWeight
@@ -28,13 +22,12 @@ public final class Algorithm {
      */
     public Double calculateWetFood(Integer catWeight){
 
-        Double result = 0.0;
-        Integer weightDifference = catWeight - minCatWeight;
-        Double amountToAdd = weightDifference * wetFoodMultiplier;
-        Double amountOfFood = baseAmountOfWet + amountToAdd;
-        result = amountOfFood;
+        int baseAmountOfWet = 150;
+        double wetFoodMultiplier = 0.025;
+        int weightDifference = catWeight - minCatWeight;
+        double amountToAdd = weightDifference * wetFoodMultiplier;
 
-        return result;
+        return baseAmountOfWet + amountToAdd;
     }
 
     /**
@@ -45,13 +38,12 @@ public final class Algorithm {
      */
     public Double calculateDryFood(Integer catWeight){
 
-        Double result = 0.0;
-        Integer weightDifference = catWeight - minCatWeight;
-        Double amountToAdd = weightDifference * dryFoodMultiplier;
-        Double amountOfFood = baseAmountOfDry + amountToAdd;
-        result = amountOfFood;
+        int baseAmountOfDry = 40;
+        double dryFoodMultiplier = 0.01;
+        int weightDifference = catWeight - minCatWeight;
+        double amountToAdd = weightDifference * dryFoodMultiplier;
 
-        return result;
+        return baseAmountOfDry + amountToAdd;
     }
 
     /**
@@ -64,12 +56,10 @@ public final class Algorithm {
      */
     public Double calculatePercentOfDryFood(Double wetResult, Double dryResult, JTextField wetFoodText){
 
-        Double result = 0.0;
-        Double amountOfWet = Double.parseDouble(wetFoodText.getText());
-        Double dailyNeeds = amountOfWet / wetResult;
+        double amountOfWet = Double.parseDouble(wetFoodText.getText());
+        double dailyNeeds = amountOfWet / wetResult;
         Double percentOfDryFood = 1.0 - dailyNeeds;
-        result = dryResult * percentOfDryFood;
 
-        return result;
+        return dryResult * percentOfDryFood;
     }
 }
