@@ -167,9 +167,9 @@ public class UserDataPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        Double wetResult;
-        Double dryResult;
-        Double percentOfDryFood;
+        double wetResult;
+        double dryResult;
+        double percentOfDryFood;
 
         Object source = e.getSource();
 
@@ -178,47 +178,54 @@ public class UserDataPanel extends JPanel implements ActionListener {
             Algorithm algorithm = new Algorithm();
 
             String catWeight = catWeightText.getText();
-            if(Integer.valueOf(catWeight) < 2000){
-                JOptionPane.showMessageDialog(null, "Cat weight too low! Cat weight must be between 2000 g and 20 000 g!", "Weight to low", JOptionPane.WARNING_MESSAGE);
+            if(Integer.parseInt(catWeight) < 2000){
+                JOptionPane.showMessageDialog(null, "Cat weight too low!" +
+                        " Cat weight must be between 2000 g and 20 000 g!", "Weight to low",
+                        JOptionPane.WARNING_MESSAGE);
                 break start;
-            } else if (Integer.valueOf(catWeight) > 20000){
-                JOptionPane.showMessageDialog(null, "Cat weight too high! Cat weight must be between 2000 g and 20 000 g!", "Weight to low", JOptionPane.WARNING_MESSAGE);
+            } else if (Integer.parseInt(catWeight) > 20000){
+                JOptionPane.showMessageDialog(null, "Cat weight too high!" +
+                        " Cat weight must be between 2000 g and 20 000 g!", "Weight to low",
+                        JOptionPane.WARNING_MESSAGE);
                 break start;
             }
 
-            if(Integer.valueOf(noMealsText.getText()) < 1 || Integer.valueOf(noMealsText.getText()) > 8){
-                JOptionPane.showMessageDialog(null, "Number of meals is wrong! It must be at least 1 or maximum 8 meals per day", "Wrong meal number", JOptionPane.WARNING_MESSAGE);
+            if(Integer.parseInt(noMealsText.getText()) < 1 || Integer.parseInt(noMealsText.getText()) > 8){
+                JOptionPane.showMessageDialog(null, "Number of meals is wrong!" +
+                        " It must be at least 1 or maximum 8 meals per day", "Wrong meal number",
+                        JOptionPane.WARNING_MESSAGE);
                 break start;
             }
 
             String noMeals = noMealsText.getText();
 
             if(calculateWet){
-                Double finalResult;
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
-                finalResult = wetResult / Double.valueOf(noMeals);
-                finalResult = roundResult(finalResult);
+                double finalResult = roundResult(wetResult / Double.parseDouble(noMeals));
                 resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else if(calculateDry){
-                Double finalResult;
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
-                finalResult = dryResult / Double.valueOf(noMeals);
-                finalResult = roundResult(finalResult);
+                double finalResult = roundResult(dryResult / Double.parseDouble(noMeals));
                 resultOneFoodText.setText("Result is: " + finalResult + " g per meal.");
                 resultOneFoodText.setVisible(true);
             } else {
                 wetResult = algorithm.calculateWetFood(Integer.valueOf(catWeight));
                 String wetFood = wetFoodText.getText();
 
-                if(Double.valueOf(wetFood) > wetResult){
-                    JOptionPane.showMessageDialog(null, "You want to give TOO MUCH wet food to your cat! Lower wet food value. \n\n It must be at most " + wetResult, "Too much wet food", JOptionPane.WARNING_MESSAGE);
+                if(Double.parseDouble(wetFood) > wetResult){
+                    JOptionPane.showMessageDialog(null, "You want to give TOO MUCH wet food to" +
+                            " your cat! Lower wet food value. \n\n It must be at most " + wetResult,
+                            "Too much wet food", JOptionPane.WARNING_MESSAGE);
                     break start;
                 }
 
                 dryResult = algorithm.calculateDryFood(Integer.valueOf(catWeight));
                 percentOfDryFood = algorithm.calculatePercentOfDryFood(wetResult, dryResult, wetFoodText);
-                resultMixFoodText.setText("Result is: " + roundResult(Double.valueOf(wetFoodText.getText()) / Double.valueOf(noMeals))  + "g wet food and " + roundResult(percentOfDryFood / Double.valueOf(noMeals)) +" g dry food per meal.");
+                resultMixFoodText.setText("Result is: " +
+                        roundResult(Double.parseDouble(wetFoodText.getText()) / Double.parseDouble(noMeals))  +
+                        "g wet food and " + roundResult(percentOfDryFood / Double.parseDouble(noMeals)) +
+                        " g dry food per meal.");
                 resultMixFoodText.setVisible(true);
             }
 
